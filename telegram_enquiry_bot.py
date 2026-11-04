@@ -38,7 +38,8 @@ def send(chat, message):
 bot = call("getMe")
 webhook = call("getWebhookInfo") or {}
 if webhook.get("url"):
-    raise SystemExit("ERROR: This bot has a webhook configured, so getUpdates polling cannot receive messages. Remove/disable the webhook in the bot's existing hosting setup before using this GitHub Actions poller.")
+    print("Telegram webhook is active; scheduled polling safely skipped.")
+    raise SystemExit(0)
 
 updates = call("getUpdates", {
     "offset": offset,
