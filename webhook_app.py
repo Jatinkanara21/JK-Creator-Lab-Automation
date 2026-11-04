@@ -62,6 +62,18 @@ def process_message(message):
     else:
         send(chat_id, "Thanks for contacting JK Creator Lab. Admin notifications are not configured yet. Please do not pay until an admin confirms your order.")
 
+# Register or refresh the webhook automatically when the hosted service starts.
+if TOKEN and WEBHOOK_SECRET and PUBLIC_URL:
+    try:
+        telegram("setWebhook", {
+            "url": PUBLIC_URL + "/telegram/webhook",
+            "secret_token": WEBHOOK_SECRET,
+            "allowed_updates": json.dumps(["message"])
+        })
+        app.logger.info("Telegram webhook registered.")
+    except Exception:
+        app.logger.exception("Could not register Telegram webhook; check hosting environment variables.")
+
 @app.get("/")
 def health():
     return jsonify({"service": "JK Creator Lab Telegram webhook", "status": "ok"})
