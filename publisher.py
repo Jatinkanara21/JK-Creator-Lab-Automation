@@ -41,7 +41,7 @@ def telegram_call(token: str, method: str, values: dict | None = None) -> dict:
 
 def main() -> None:
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "@JKCreatorLab").strip()
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "@JK_Creator_Lab_21").strip()
     if not token:
         fail("Missing TELEGRAM_BOT_TOKEN secret. Add it in GitHub repository Actions secrets.")
 
