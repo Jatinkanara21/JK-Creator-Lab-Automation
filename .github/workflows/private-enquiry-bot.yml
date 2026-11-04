@@ -1,17 +1,27 @@
 name: JK Creator Lab Private Enquiries
+
 on:
+  # Run off the busy hour boundary; GitHub recommends avoiding minute 0.
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "2/5 * * * *"
   workflow_dispatch:
+  # Run immediately when the bot code or this workflow is changed.
+  push:
+    paths:
+      - "telegram_enquiry_bot.py"
+      - ".github/workflows/private-enquiry-bot.yml"
+
 permissions:
   contents: write
+
 concurrency:
   group: jk-private-enquiries
   cancel-in-progress: false
+
 jobs:
   poll:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
