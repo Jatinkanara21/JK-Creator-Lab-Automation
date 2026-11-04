@@ -1,6 +1,6 @@
 # JK Creator Lab Automation
 
-A zero-paid-AI daily Telegram publisher for **@JKCreatorLab**. It uses a prepared content library and GitHub Actions.
+A zero-paid-AI daily Telegram publisher for **@JK_Creator_Lab_21**. It uses a prepared content library and GitHub Actions.
 
 ## What it does
 
@@ -13,12 +13,12 @@ A zero-paid-AI daily Telegram publisher for **@JKCreatorLab**. It uses a prepare
 ## One-time setup
 
 1. Open the Telegram bot chat and send `/start` if you have not already.
-2. Add your bot to **@JKCreatorLab** as an administrator with permission to post messages.
+2. Add **@JKCreatorLabBot** to **@JK_Creator_Lab_21** as an administrator with permission to post messages.
 3. In this GitHub repository, open **Settings → Secrets and variables → Actions → New repository secret**.
 4. Create a secret named `TELEGRAM_BOT_TOKEN` and paste the bot token from BotFather. Never put the token in source code, commits, screenshots, or chat messages.
 5. Open **Actions → JK Creator Lab — Daily Telegram Publisher → Run workflow** to test the first post.
 
-The workflow already targets `@JKCreatorLab`. To change the channel, edit the `TELEGRAM_CHAT_ID` value in `.github/workflows/daily-publish.yml`.
+The workflow already targets `@JK_Creator_Lab_21`. To change the channel, edit the `TELEGRAM_CHAT_ID` value in `.github/workflows/daily-publish.yml`.
 
 ## Edit the content
 
