@@ -1,0 +1,51 @@
+name: JK Creator Lab — Approved Promotion Publisher
+
+on:
+  workflow_dispatch:
+    inputs:
+      promotion_id:
+        description: Exact ID from content/promotions.json (must have status=approved)
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: approved-promotion-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish-approved-promotion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Publish approved promotion
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: "@JK_Creator_Lab_21"
+          JK_UPI_ID: ${{ secrets.JK_UPI_ID }}
+          PROMOTION_ID: ${{ inputs.promotion_id }}
+        run: python publish_promotion.py
+
+      - name: Save promotion publication record
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sales/published_promotions.json
+          if git diff --cached --quiet; then
+            echo "No promotion record change."
+          else
+            git commit -m "Record approved promotion publication"
+            git push
+          fi
