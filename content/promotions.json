@@ -31,5 +31,38 @@
     "delivery": "Manual delivery after scope and UPI payment are confirmed.",
     "cta": "Follow the channel for ordering instructions.",
     "disclosure": "This is an independent design service. One revision can be agreed before payment."
+  },
+  {
+    "id": "creator-audit-299",
+    "type": "service",
+    "status": "draft",
+    "title": "YouTube Video SEO Quick Fix",
+    "price_inr": 299,
+    "description": "For one video: review the supplied video or public link and brief, then deliver 3 accurate title options, one optimized description, relevant hashtags and tags, plus a short upload checklist. No guaranteed views, rankings or subscribers.",
+    "delivery": "Manual delivery within 48 hours after the scope, required video details and payment are confirmed.",
+    "cta": "Comment ORDER below this post. Wait for an admin reply confirming availability and the exact order process. Do not pay before confirmation. Never post personal or payment details in comments.",
+    "disclosure": "JK Creator Lab independent creator service. YouTube performance is not guaranteed."
+  },
+  {
+    "id": "creator-growth-499",
+    "type": "service",
+    "status": "draft",
+    "title": "YouTube Creator Growth Pack",
+    "price_inr": 499,
+    "description": "For one video: content/topic review, 5 accurate title options, optimized description, relevant hashtags and tags, thumbnail text/concept, opening-hook suggestions and a practical upload checklist. No guaranteed views, rankings or subscribers.",
+    "delivery": "Manual delivery within 48 hours after the scope, required video details and payment are confirmed.",
+    "cta": "Comment ORDER below this post. Wait for an admin reply confirming availability and the exact order process. Do not pay before confirmation. Never post personal or payment details in comments.",
+    "disclosure": "JK Creator Lab independent creator service. YouTube performance is not guaranteed."
+  },
+  {
+    "id": "creator-pro-999",
+    "type": "service",
+    "status": "draft",
+    "title": "YouTube Full Video Optimization — Pro",
+    "price_inr": 999,
+    "description": "For one video: detailed review of the actual video and target audience, 5 title options, complete description, relevant tags and hashtags, thumbnail direction and text, first-30-second hook improvements, chapters where suitable, and a prioritized publishing checklist. One reasonable revision. No guaranteed views, rankings or subscribers.",
+    "delivery": "Manual delivery within 48 hours after the scope, required video details and payment are confirmed.",
+    "cta": "Comment ORDER below this post. Wait for an admin reply confirming availability and the exact order process. Do not pay before confirmation. Never post personal or payment details in comments.",
+    "disclosure": "JK Creator Lab independent creator service. YouTube performance is not guaranteed."
   }
 ]
