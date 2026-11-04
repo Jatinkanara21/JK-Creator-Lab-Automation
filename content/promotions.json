@@ -1,0 +1,35 @@
+[
+  {
+    "id": "seo-starter-001",
+    "type": "digital_product",
+    "status": "draft",
+    "title": "YouTube SEO Starter Kit",
+    "price_inr": 99,
+    "description": "A beginner-friendly checklist for planning accurate titles, descriptions, hashtags and upload metadata.",
+    "delivery": "Manual delivery after UPI payment is verified.",
+    "cta": "Read the product details in this channel and follow the order instructions shared in the channel.",
+    "disclosure": "This is a JK Creator Lab digital product. No specific YouTube ranking or view results are guaranteed."
+  },
+  {
+    "id": "seo-service-001",
+    "type": "service",
+    "status": "draft",
+    "title": "YouTube SEO Starter Service",
+    "price_inr": 299,
+    "description": "One video title, description, relevant tags and publishing checklist, based on the actual video topic supplied by the customer.",
+    "delivery": "Manual service delivery after scope and UPI payment are confirmed.",
+    "cta": "Follow the channel for ordering instructions.",
+    "disclosure": "This is an independent creator service. Results vary; rankings and views are not guaranteed."
+  },
+  {
+    "id": "thumbnail-service-001",
+    "type": "service",
+    "status": "draft",
+    "title": "YouTube Thumbnail Design",
+    "price_inr": 199,
+    "description": "One original thumbnail concept based on the customer's video subject and brief.",
+    "delivery": "Manual delivery after scope and UPI payment are confirmed.",
+    "cta": "Follow the channel for ordering instructions.",
+    "disclosure": "This is an independent design service. One revision can be agreed before payment."
+  }
+]
