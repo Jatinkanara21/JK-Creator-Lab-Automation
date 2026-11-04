@@ -31,7 +31,7 @@ jobs:
       - name: Publish today's post
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: "@JKCreatorLab"
+          TELEGRAM_CHAT_ID: "@JK_Creator_Lab_21"
         run: python publisher.py
 
       - name: Save publishing state
