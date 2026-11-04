@@ -79,7 +79,7 @@ def main() -> None:
         f"Payment note: Add your order ID in the UPI note if provided after placing your order. "
         f"Please do not share your UPI PIN or OTP. Payment is confirmed only after we verify the credit.\n\n"
         f"Delivery: {delivery}\n\n{disclosure}\n\n"
-        "For order instructions, follow the pinned instructions in this channel."
+        "To enquire, comment ORDER below this post and wait for an admin to confirm availability and the order process. Do not post personal, bank or payment details in public comments. Do not pay until your order scope and delivery slot are confirmed."
     )
     if len(message) > 4096:
         fail("Promotion message exceeds Telegram's 4096-character limit.")
