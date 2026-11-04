@@ -52,6 +52,18 @@ def main() -> None:
     if bot_username.lower() != "jkcreatorlabbot":
         fail("The TELEGRAM_BOT_TOKEN secret belongs to a different bot. Update it with the token for @JKCreatorLabBot.")
 
+    # Diagnose the exact target and the bot's membership before attempting to post.
+    chat = telegram_call(token, "getChat", {"chat_id": chat_id}).get("result", {})
+    print(f"Resolved destination: title={chat.get('title', 'unknown')!r}, username=@{chat.get('username', 'unknown')}, type={chat.get('type', 'unknown')}")
+    membership = telegram_call(token, "getChatMember", {
+        "chat_id": chat_id,
+        "user_id": bot.get("id"),
+    }).get("result", {})
+    status = membership.get("status", "unknown")
+    print(f"Bot channel membership status: {status}")
+    if status not in ("administrator", "creator"):
+        fail(f"Bot @{bot_username} is not an administrator of {chat_id}; Telegram reports status={status!r}. Add this exact bot to the resolved channel and grant Post Messages.")
+
     today = datetime.now(TIMEZONE).date().isoformat()
     try:
         state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
