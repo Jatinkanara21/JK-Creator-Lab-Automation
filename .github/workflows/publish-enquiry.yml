@@ -1,0 +1,31 @@
+name: JK Creator Lab — Enquiry Post
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Confirm publishing the enquiry-only ₹299 service announcement
+        required: true
+        type: choice
+        options:
+          - "no"
+          - "yes"
+
+permissions:
+  contents: read
+
+jobs:
+  publish-enquiry:
+    if: ${{ inputs.confirm == 'yes' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Publish enquiry-only announcement
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: "@JK_Creator_Lab_21"
+        run: python publish_enquiry.py
