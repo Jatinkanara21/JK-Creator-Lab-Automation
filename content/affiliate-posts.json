@@ -1,0 +1,10 @@
+[
+  {
+    "id": "affiliate-template-001",
+    "status": "draft",
+    "title": "Affiliate recommendation template",
+    "text": "🛠️ Creator tool recommendation\n\n[Describe the tool accurately, explain who it may help, and include a real tested link.]\n\nDisclosure: This post contains an affiliate link. JK Creator Lab may earn a commission if you make a qualifying purchase, at no extra cost to you. We only recommend tools after checking their relevance.\n\n[INSERT VERIFIED AFFILIATE URL]",
+    "affiliate_url": "",
+    "commission_disclosure_required": true
+  }
+]
