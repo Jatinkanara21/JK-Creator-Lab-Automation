@@ -72,6 +72,17 @@ def post_ready_for_today(post: object, chat_id: str, today: str) -> tuple[bool, 
         return False, "publish_at must be today's 09:00 Asia/Kolkata slot"
     if not isinstance(post.get("text"), str) or not post["text"].strip():
         return False, "text is missing"
+    text_lower = post["text"].lower()
+    sales_markers = (
+        "₹",
+        "seo quick fix",
+        "creator growth pack",
+        "pro optimization",
+        "need help with one youtube video",
+        "?start=order",
+    )
+    if any(marker in text_lower for marker in sales_markers):
+        return False, "contains a price, sales offer or order CTA"
     return True, ""
 
 
