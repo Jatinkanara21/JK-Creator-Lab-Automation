@@ -39,6 +39,42 @@ def telegram_call(token: str, method: str, values: dict | None = None) -> dict:
     return result
 
 
+
+def post_ready_for_today(post: object, chat_id: str, today: str) -> tuple[bool, str]:
+    """Fail closed: publish only explicitly approved, complete, non-promotional Telegram text."""
+    if not isinstance(post, dict):
+        return False, "not a post object"
+    if post.get("status") not in {"approved", "ready"}:
+        return False, "status is not explicitly approved/ready"
+    if post.get("content_type") not in {"educational", "creator_tip"}:
+        return False, "content_type is not educational/creator_tip"
+    if post.get("destination") != chat_id:
+        return False, "destination is missing or does not match this channel"
+    if post.get("is_promotional") is not False:
+        return False, "is_promotional must be explicitly false"
+    if post.get("rights_status") not in {"original", "licensed", "public_domain", "cleared"}:
+        return False, "rights_status is missing or not cleared"
+    if post.get("synthetic_media") is not False:
+        return False, "synthetic_media must be explicitly false for this text-only workflow"
+    if post.get("media") not in (None, []):
+        return False, "this workflow accepts text-only Telegram posts"
+    publish_at = post.get("publish_at")
+    if not isinstance(publish_at, str) or not publish_at.strip():
+        return False, "publish_at is missing"
+    try:
+        scheduled = datetime.fromisoformat(publish_at.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return False, "publish_at is not a valid ISO-8601 timestamp"
+    if scheduled.tzinfo is None:
+        return False, "publish_at must include a timezone offset"
+    local_time = scheduled.astimezone(TIMEZONE)
+    if local_time.date().isoformat() != today or (local_time.hour, local_time.minute) != (9, 0):
+        return False, "publish_at must be today's 09:00 Asia/Kolkata slot"
+    if not isinstance(post.get("text"), str) or not post["text"].strip():
+        return False, "text is missing"
+    return True, ""
+
+
 def main() -> None:
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     chat_id = os.environ.get("TELEGRAM_CHAT_ID", "@JK_Creator_Lab_21").strip()
@@ -77,10 +113,22 @@ def main() -> None:
     if not isinstance(posts, list) or not posts:
         fail("content/posts.json must contain a non-empty list of posts.")
 
-    index = int(state.get("next_post_index", 0)) % len(posts)
-    post = posts[index]
-    if not isinstance(post, dict) or not post.get("text"):
-        fail(f"Post at index {index} is missing its text.")
+    start_index = int(state.get("next_post_index", 0)) % len(posts)
+    selected = None
+    for step in range(len(posts)):
+        candidate_index = (start_index + step) % len(posts)
+        candidate = posts[candidate_index]
+        ready, reason = post_ready_for_today(candidate, chat_id, today)
+        if ready:
+            selected = (candidate_index, candidate)
+            break
+        print(f"Skipping post {candidate_index + 1}/{len(posts)}: {reason}.")
+
+    if selected is None:
+        print("No explicitly approved, complete, non-promotional Telegram text post is ready for today's 09:00 Asia/Kolkata slot. Nothing was published.")
+        return
+
+    index, post = selected
     message = str(post["text"]).strip()
     if len(message) > 4096:
         fail("Telegram message exceeds the 4096-character limit.")
