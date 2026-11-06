@@ -22,7 +22,18 @@ The workflow already targets `@JK_Creator_Lab_21`. To change the channel, edit t
 
 ## Edit the content
 
-Add or edit objects in `content/posts.json`. Each object must have a `text` field. Telegram messages must be no longer than 4096 characters. Keep posts accurate, original, useful, and non-spammy.
+Add or edit objects in `content/posts.json`. The daily Telegram publisher now fails closed: an item is skipped unless it is explicitly marked `status: "approved"` or `status: "ready"` and includes all of these fields:
+
+- `content_type`: `"educational"` or `"creator_tip"`
+- `destination`: exactly `"@JK_Creator_Lab_21"`
+- `publish_at`: timezone-aware ISO-8601 timestamp for the current day's 09:00 Asia/Kolkata slot
+- `rights_status`: `"original"`, `"licensed"`, `"public_domain"` or `"cleared"`
+- `is_promotional`: `false`
+- `synthetic_media`: `false` for this text-only Telegram workflow
+- `media`: omitted or an empty list (this workflow publishes text only)
+- `text`: non-empty and no longer than 4096 characters
+
+Missing or invalid approval metadata means nothing is published and the queue position is not advanced. Promotional or sales content is not eligible for this daily educational queue. Instagram media and YouTube videos are not published by this workflow; those require separate media review and complete platform-specific settings, including audience/made-for-kids, synthetic-media disclosure, rights, thumbnail and publish time.
 
 ## Check status
 
